@@ -80,6 +80,15 @@ def search_transactions():
         return render_template('search_list.html', message={"message":"No record in the specified range"})
     return render_template('search.html')
 
+@app.route('/balance')
+def total_balance():
+    total_amount = 0.0
+    for transaction in transactions:
+        total_amount += transaction['amount']
+    return render_template('transactions.html', 
+        transactions=transactions,total_balance=f'Total Balance:  {str(total_amount)}')
+
+
 # Run the Flask app
 if __name__ == "__main__":
     app.run(debug=True)

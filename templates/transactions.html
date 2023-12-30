@@ -47,7 +47,7 @@
             padding-left: 20px;
             padding-right: 20px;
         }
-        
+
     </style>
 </head>
 <body>
@@ -75,12 +75,19 @@
                     </td>
                 </tr>
                 {% endfor %}
+                {% if total_balance %}
+                <tr>
+                    <td></td>
+                    <td>{{ total_balance }}
+                </tr>
+                {% endif %}
             </tbody>
         </table>
 
         <div class="d-flex justify-content-center">
             <a class="btn btn-success" href="{{ url_for('add_transaction') }}" style="margin-right: 50px;">Add Transaction</a>
-            <a class="btn btn-warning" href="{{ url_for('search_transactions') }}">Search Transactions</a>
+            <a class="btn btn-warning" href="{{ url_for('search_transactions') }}" style="margin-right: 50px;">Search Transactions</a>
+            <a class="btn btn-info" href="{{ url_for('total_balance') }}">Count Total Balance</a>
             
         </div>
 
