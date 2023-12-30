@@ -39,6 +39,11 @@
             background-color: #f6d365;
             border-color: #f6d365;
         }
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
@@ -53,11 +58,12 @@
                 <label for="max_amount">Maximum Amount:</label>
                 <input type="number" class="form-control" id="max_amount" name="max_amount" step="0.01" required>
             </div>
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Search</button>
-                <a class="btn btn-info" style="float:right;" href="{{ url_for('get_transactions') }}">Go Back</a>
+            <div class="form-footer">
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success">Search</button>
+                </div>
+                <a class="btn btn-info" href="{{ url_for('get_transactions') }}">Go Back</a>
             </div>
-
         </form>
     </div>
 </body>

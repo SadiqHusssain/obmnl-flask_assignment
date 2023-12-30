@@ -1,5 +1,5 @@
 # Import libraries
-from flask import Flask, request, url_for, redirect, render_template
+from flask import Flask, request, url_for, redirect, render_template, make_response
 
 # Instantiate Flask functionality
 app = Flask('__name__')
@@ -75,10 +75,9 @@ def search_transactions():
                 print(transaction)
 
         if filtered_transactions:
-            return render_template('transactions.html', transactions=filtered_transactions)
-        res = make_response({"message":"No record in the specified range"})
-        return res, 404
-    
+            return render_template('search_list.html', transactions=filtered_transactions)
+
+        return render_template('search_list.html', message={"message":"No record in the specified range"})
     return render_template('search.html')
 
 # Run the Flask app
