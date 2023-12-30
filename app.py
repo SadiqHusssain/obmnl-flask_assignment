@@ -41,8 +41,8 @@ def edit_transaction(transaction_id):
     if request.method == 'POST':
         for transaction in transactions:
             if transaction['id'] == transaction_id:
-                transaction['date'] == request.form['date']
-                transaction['amount'] == float(request.form['amount'])
+                transaction['date'] = request.form['date']
+                transaction['amount'] = float(request.form['amount'])
                 break
         return redirect(url_for('get_transactions'))
 
