@@ -14,23 +14,27 @@ transactions = [
 
 # Read operation
 @app.route('/')
-def read_trans():
+def get_transactions():
     try:
-        return render_template('transactions.html'), transactions
+        return render_template('transactions.html', transactions=transactions)
     except NameError:
         return {"message": "transactions is not defined"}, 500
 
 
 # Create operation
-@app.route('/create', methods=['POST'])
-def create_trans():
+@app.route('/add', methods=['GET', 'POST'])
+def add_transaction():
     if request.method == 'POST':
-        transaction = {'id':request.form.id, 'date': request.form.date, 'amount':request.form.amount}
-        if transaction:
-            transactions.append(transaction)
-            return redirect(url_for('read_trans'))
-        return {"message": "Please input valid data"}, 422
+        transaction = {
+            'id':len(transactions)+1,
+            'date': request.form['date'],
+            'amount':float(request.form['amount'])
+            }
 
+        transactions.append(transaction)
+        return redirect(url_for('get_transactions'))
+    else:
+        return render_template('form.html')
 
 # Update operation
 @app.route('/update', methods=['POST'])
