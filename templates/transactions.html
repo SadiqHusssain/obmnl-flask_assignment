@@ -38,12 +38,22 @@
             background-color: #f6d365;
             border-color: #f6d365;
         }
+        .home-button {
+            float: right;
+            margin-right: 100;
+        #btn-home {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1 class="text-center">Transaction Records</h1>
-
+        <div class="home-button">
+            <a id="btn-home" class="btn btn-info" href="{{ url_for('get_transactions') }}">Home</a>
+        </div>
         <table class="table transaction-table">
             <thead>
                 <tr>
@@ -67,8 +77,11 @@
         </table>
 
         <div class="d-flex justify-content-center">
-            <a class="btn btn-success" href="{{ url_for('add_transaction') }}">Add Transaction</a>
+            <a class="btn btn-success" href="{{ url_for('add_transaction') }}" style="margin-right: 50px;">Add Transaction</a>
+            <a class="btn btn-warning" href="{{ url_for('search_transactions') }}">Search Transactions</a>
+            
         </div>
+
     </div>
 </body>
 </html>

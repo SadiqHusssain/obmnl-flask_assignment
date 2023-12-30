@@ -61,6 +61,26 @@ def delete_transaction(transaction_id):
 
     return redirect(url_for('get_transactions'))
 
+# Search functionality based on amount range
+@app.route('/search', methods=['GET', 'POST'])
+def search_transactions():
+    filtered_transactions = []
+    if request.method == 'POST':
+        min = float(request.form['min_amount'])
+        max = float(request.form['max_amount'])
+
+        for transaction in transactions:
+            if transaction['amount'] <= max and transaction['amount'] >= min:
+                filtered_transactions.append(transaction)
+                print(transaction)
+
+        if filtered_transactions:
+            return render_template('transactions.html', transactions=filtered_transactions)
+        res = make_response({"message":"No record in the specified range"})
+        return res, 404
+    
+    return render_template('search.html')
+
 # Run the Flask app
 if __name__ == "__main__":
     app.run(debug=True)
