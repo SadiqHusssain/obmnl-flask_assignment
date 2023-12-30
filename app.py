@@ -52,15 +52,14 @@ def edit_transaction(transaction_id):
     
         
 # Delete operation
-
-# Update operation
-@app.route('/delete', methods=['GET'])
-def delete_trans(id):
-    if request.method == 'POST':
-        for transaction in transactions:
-            if transaction['id'] == id:
-                transactions.remmove(transaction)
-                return redirect(url_for('read_trans'))
+@app.route('/delete/<int:transaction_id>')
+def delete_transaction(transaction_id):
+    for transaction in transactions:
+        if transaction['id'] == transaction_id:
+            transactions.remove(transaction)
+            break
+            
+    return redirect(url_for('get_transactions'))
 
 # Run the Flask app
 if
