@@ -5,7 +5,6 @@ from flask import Flask, request, url_for, redirect, render_template
 app = Flask('__name__')
 
 # Sample data
-# Sample data
 transactions = [
     {'id': 1, 'date': '2023-06-01', 'amount': 100},
     {'id': 2, 'date': '2023-06-02', 'amount': -200},
@@ -37,13 +36,20 @@ def add_transaction():
         return render_template('form.html')
 
 # Update operation
-@app.route('/update', methods=['POST'])
-def update_trans(id):
+@app.route('/edit/<int:transaction_id>', methods=['GET', 'POST'])
+def edit_transaction(transaction_id):
     if request.method == 'POST':
         for transaction in transactions:
-            if transaction['id'] == id:
-                return render_template('edit.html'), transaction
-        return redirect(url_for('read_trans'))
+            if transaction['id'] == transaction_id:
+                transaction['date'] == request.form['date']
+                transaction['amount'] == float(request.form['amount'])
+                break
+        return redirect(url_for('get_transactions'))
+
+    for transaction in transactions:
+        if transaction['id'] == transaction_id:
+            return render_template('edit.html', transaction=transaction)  
+    
         
 # Delete operation
 
